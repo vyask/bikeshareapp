@@ -1,0 +1,131 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    BikeshareDataStack
+
+    BikeShare Cloudformation Template for creating dynamodb tables
+    
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 3
+
+
+Resources:
+
+    BikeLocations: 
+       Type: AWS::DynamoDB::Table
+       Properties: 
+        AttributeDefinitions: 
+        - 
+          AttributeName: "LocationId"
+          AttributeType: "S"
+        - 
+          AttributeName: "BikeId"
+          AttributeType: "S"
+        - 
+          AttributeName: "Status"
+          AttributeType: "N"
+
+        KeySchema: 
+          - 
+            AttributeName: "LocationId"
+            KeyType: "HASH"
+          - 
+            AttributeName: "BikeId"
+            KeyType: "RANGE"
+        ProvisionedThroughput: 
+          ReadCapacityUnits: "1"
+          WriteCapacityUnits: "1"
+        TableName: "bikelocations"
+        GlobalSecondaryIndexes: 
+          - 
+            IndexName: "LocationAvailbility"
+            KeySchema: 
+              - 
+                AttributeName: "LocationId"
+                KeyType: "HASH"
+              - 
+                AttributeName: "Status"
+                KeyType: "RANGE"
+            Projection: 
+              ProjectionType: "ALL"
+            ProvisionedThroughput: 
+              ReadCapacityUnits: "1"
+              WriteCapacityUnits: "1"
+
+    Bikes: 
+      Type: AWS::DynamoDB::Table
+      DependsOn: "BikeLocations"
+      Properties: 
+        AttributeDefinitions: 
+          - 
+            AttributeName: "BikeId"
+            AttributeType: "S"
+        KeySchema: 
+          - 
+            AttributeName: "BikeId"
+            KeyType: "HASH"          
+        ProvisionedThroughput: 
+          ReadCapacityUnits: "1"
+          WriteCapacityUnits: "1"
+        TableName: "bikes"
+
+    Rides: 
+      Type: AWS::DynamoDB::Table
+      DependsOn: "Bikes"
+      Properties: 
+        AttributeDefinitions: 
+          - 
+            AttributeName: "RideId"
+            AttributeType: "S"
+          - 
+            AttributeName: "UserId"
+            AttributeType: "S"
+          - 
+            AttributeName: "BikeId"
+            AttributeType: "S"
+          - 
+            AttributeName: "PickupTime"
+            AttributeType: "S"
+        KeySchema: 
+          - 
+            AttributeName: "UserId"
+            KeyType: "HASH"
+          - 
+            AttributeName: "BikeId"
+            KeyType: "RANGE"
+        ProvisionedThroughput: 
+          ReadCapacityUnits: "1"
+          WriteCapacityUnits: "1"
+        TableName: "bikerides"
+        GlobalSecondaryIndexes: 
+          - 
+            IndexName: "RideHash"
+            KeySchema: 
+              - 
+                AttributeName: "RideId"
+                KeyType: "HASH"
+            Projection: 
+              ProjectionType: "ALL"
+            ProvisionedThroughput: 
+              ReadCapacityUnits: "1"
+              WriteCapacityUnits: "1"
+          - 
+            IndexName: "PickupDate"
+            KeySchema: 
+              - 
+                AttributeName: "PickupTime"
+                KeyType: "HASH"
+              - 
+                AttributeName: "UserId"
+                KeyType: "RANGE"
+            Projection: 
+              ProjectionType: "ALL"
+            ProvisionedThroughput: 
+              ReadCapacityUnits: "1"
+              WriteCapacityUnits: "1"
+
+#Outputs:
+
+

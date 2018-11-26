@@ -1,0 +1,204 @@
+{
+    "bikelocations": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"111"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"112"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"113"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"114"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"115"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"116"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"117"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"118"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"119"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,1"},
+                    "BikeId": {"S":"110"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-KendalSq"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"121"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"122"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"123"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"124"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"125"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"126"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"127"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"128"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"129"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "LocationId": {"S":"1,2"},
+                    "BikeId": {"S":"120"},
+                    "Status": {"N":"0"},
+                    "LocationName": {"S":"Cambridge-MIT"}
+                }
+            }
+        }
+    ]
+}

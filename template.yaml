@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    BikeShareApp
+
+    BikeShare SAM Template for complete serverless
+    
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 3
+
+
+Resources:
+
+    getBike:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: get_bike/
+            Handler: app1.gbikeHandler
+            Runtime: nodejs8.10
+            Role: <role-arn>
+            Timeout: 240
+            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                Variables:
+                    PARAM1: VALUE
+            Events:
+                RequestBike:
+                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    Properties:
+                        Path: /Bike/book
+                        Method: post
+
+    returnBike:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: return_bike/
+            Handler: app2.rbikeHandler
+            Runtime: nodejs8.10
+            Role: <role-arn>
+            Timeout: 240
+            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                Variables:
+                    PARAM1: VALUE
+            Events:
+                BookBike:
+                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    Properties:
+                        Path: /Bike/return
+                        Method: post
+
+
+Outputs:
+
+    getBikeApi:
+      Description: "API Gateway endpoint URL for Prod stage for  getBike function"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/Bike/book"
+
+    getBike:
+      Description: "getBike Lambda Function ARN"
+      Value: !GetAtt getBike.Arn
+
+    returnBikeApi:
+      Description: "API Gateway endpoint URL for Prod stage for  returnBike function"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/Bike/return"
+
+    returnBike:
+      Description: "returnBike Lambda Function ARN"
+      Value: !GetAtt returnBike.Arn
