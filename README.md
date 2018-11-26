@@ -114,6 +114,7 @@ AWS Lambda NodeJS runtime requires a flat folder with all dependencies including
 
 
 Next, run the following command to package our Lambda function to S3:
+**NOTE**:  This implementation exposes APIs without authentication, use it for testing purposes only and tear down your stack. Implement security for APIs for real world usage.
 
 ```bash
 sam package \
@@ -173,11 +174,12 @@ aws cloudformation describe-stacks \
 
 ## Bringing to the next level
 
-Here are a few ideas that you can use to get more acquainted as to how this overall process works:
+This implementation is basic, primarily addressing services and backend storage.
+Here are a few ideas that you can use to extend further
 
-* Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
-* Update unit test to capture that
-* Package & Deploy
+* Use Cognito to manage users and secure API.
+* Use AWS Amplify to build front end.
+* Extend app features to include features like user registration, payment set up ..etc.
 
 Next, you can use the following resources to know more about beyond hello world samples and how others structure their Serverless applications:
 
