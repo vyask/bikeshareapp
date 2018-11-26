@@ -1,24 +1,28 @@
-# sam-app
+# bikeshare-app
 
-This is a sample template for sam-app - Below is a brief explanation of what we have generated for you:
+This is a sample template for bikeshare-app - Below is a brief explanation of what is there:
 
 ```bash
 .
 ├── README.md                   <-- This instructions file
-├── hello_world                 <-- Source code for a lambda function
-│   ├── app.js                  <-- Lambda function code
+├── get_bike                 <-- Source code for a lambda function to get a bike
+│   ├── app1.js                  <-- Lambda function code
 │   ├── package.json            <-- NodeJS dependencies
-│   └── tests                   <-- Unit tests
-│       └── unit
-│           └── test_handler.js
-└── template.yaml               <-- SAM template
+├── return_bike                 <-- Source code for a lambda function to return a bike
+│   ├── app2.js                  <-- Lambda function code
+│   ├── package.json            <-- NodeJS dependencies│   
+└── template.yaml               <-- SAM template for APIs
+└── bikesharedata.yaml               <-- SAM template for DynamoDB tables
+└── samplelocations.json               <-- Sample data for bikelocations table.
+
 ```
 
 ## Requirements
 
 * AWS CLI already configured with Administrator permission
 * [NodeJS 8.10+ installed](https://nodejs.org/en/download/)
-* [Docker installed](https://www.docker.com/community-edition)
+* [Docker installed](https://www.docker.com/community-edition), 
+* SAM CLI installed, for desktops with docker toolbox , please make sure 'SAM CLI, version 0.6.1' or higher.
 
 ## Setup process
 
@@ -27,10 +31,38 @@ This is a sample template for sam-app - Below is a brief explanation of what we 
 In this example we use `npm` but you can use `yarn` if you prefer to manage NodeJS dependencies:
 
 ```bash
-cd hello_world
+cd get_bike
 npm install
 cd ../
+cd return_bike
+npm install
+cd ../```
+
+We need a `S3 bucket` where we can upload our Lambda functions packaged as ZIP before we deploy anything - If you don't have a S3 bucket to store code artifacts then this is a good time to create one:
+
+```bash
+aws s3 mb s3://BUCKET_NAME
 ```
+
+## DynamoDB table creation and data population.
+bikesharedata.yaml contains dynamodb table definitions. installing this is same as installing an app . follow the instructions below.
+```bash
+sam package \
+    --template-file bikesharedata.yaml \
+    --output-template-file cfdata.yaml \
+    --s3-bucket REPLACE_THIS_WITH_YOUR_S3_BUCKET_NAME
+```
+
+Next, the following command will create a Cloudformation Stack, that should result in 3 tables (bikelocations, bikes, bikerides.
+
+```bash
+sam deploy \
+    --template-file cfdata.yaml \
+    --stack-name bikeshare-data \
+    --capabilities CAPABILITY_IAM
+    
+## Load Sample data into bikelocations table
+aws dynamodb batch-write-item --request-items file://samplelocations.json
 
 ### Local development
 
@@ -40,18 +72,25 @@ cd ../
 sam local start-api
 ```
 
-If the previous command ran successfully you should now be able to hit the following local endpoint to invoke your function `http://localhost:3000/hello`
+If the previous command ran successfully you should now be able to hit the following local endpoint to invoke your function `http://localhost:3000/Bike/book?Location="1,1"&Userid="testuser"`
 
 **SAM CLI** is used to emulate both Lambda and API Gateway locally and uses our `template.yaml` to understand how to bootstrap this environment (runtime, where the source code is, etc.) - The following excerpt is what the CLI will read in order to initialize an API and its routes:
 
 ```yaml
 ...
 Events:
-    HelloWorld:
+    BookBike:
         Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
         Properties:
-            Path: /hello
-            Method: get
+            Path: /Bike/book
+            Method: post
+            
+Events:
+    ReturnBike:
+        Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+        Properties:
+            Path: /Bike/return
+            Method: post
 ```
 
 ## Packaging and deployment
@@ -63,15 +102,16 @@ AWS Lambda NodeJS runtime requires a flat folder with all dependencies including
     FirstFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: hello_world/
+            CodeUri: get_bike/
+            ...
+    SecondFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: return_bike/
             ...
 ```
 
-Firstly, we need a `S3 bucket` where we can upload our Lambda functions packaged as ZIP before we deploy anything - If you don't have a S3 bucket to store code artifacts then this is a good time to create one:
 
-```bash
-aws s3 mb s3://BUCKET_NAME
-```
 
 Next, run the following command to package our Lambda function to S3:
 
@@ -87,9 +127,11 @@ Next, the following command will create a Cloudformation Stack and deploy your S
 ```bash
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name sam-app \
+    --stack-name bikeshare-app \
     --capabilities CAPABILITY_IAM
 ```
+
+## Remember to use the bucket created here while building the code pipeline during automation.
 
 > **See [Serverless Application Model (SAM) HOWTO Guide](https://github.com/awslabs/serverless-application-model/blob/master/HOWTO.md) for more details in how to get started.**
 
@@ -97,18 +139,13 @@ After deployment is complete you can run the following command to retrieve the A
 
 ```bash
 aws cloudformation describe-stacks \
-    --stack-name sam-app \
+    --stack-name bikeshare-app \
     --query 'Stacks[].Outputs'
 ``` 
 
 ## Testing
+Not Implemented yet.
 
-We use `mocha` for testing our code and it is already added in `package.json` under `scripts`, so that we can simply run the following command to run our tests:
-
-```bash
-cd hello_world
-npm run test
-```
 
 # Appendix
 
@@ -129,7 +166,7 @@ sam deploy \
     --parameter-overrides MyParameterSample=MySampleValue
 
 aws cloudformation describe-stacks \
-    --stack-name sam-app --query 'Stacks[].Outputs'
+    --stack-name bikeshare-app --query 'Stacks[].Outputs'
 ```
 
 **NOTE**: Alternatively this could be part of package.json scripts section.
