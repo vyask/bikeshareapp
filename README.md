@@ -175,11 +175,11 @@ aws cloudformation describe-stacks \
 ## Bringing to the next level
 
 This implementation is basic, primarily addressing services and backend storage.
-Here are a few ideas that you can use to extend further
+Here are a few ideas that you can use to extend further :
 
 * Use Cognito to manage users and secure API.
 * Use AWS Amplify to build front end.
-* Extend app features to include features like user registration, payment set up ..etc.
+* Extend app to include features like user registration, payment set up ..etc.
 
 Next, you can use the following resources to know more about beyond hello world samples and how others structure their Serverless applications:
 
