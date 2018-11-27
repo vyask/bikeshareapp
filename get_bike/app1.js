@@ -12,7 +12,7 @@ var response = { // for API gateway integration this type of response is require
         	"isBase64Encoded": false
     	};;
 
-
+//
 
 exports.gbikeHandler = (event, context, callback) => {
 

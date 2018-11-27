@@ -10,7 +10,7 @@ var response = { // for API gateway integration this type of response is require
         	"isBase64Encoded": false
     	};;
 
-
+//
 // assumed pickup and drop off locations are same
 exports.rbikeHandler = (event, context, callback) => {
     	var location = event.queryStringParameters.Location;

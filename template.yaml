@@ -25,7 +25,7 @@ Resources:
                 Variables:
                     PARAM1: VALUE
             Events:
-                RequestBike:
+                BookBike:
                     Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
                     Properties:
                         Path: /Bike/book
@@ -43,7 +43,7 @@ Resources:
                 Variables:
                     PARAM1: VALUE
             Events:
-                BookBike:
+                ReturnBike:
                     Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
                     Properties:
                         Path: /Bike/return
