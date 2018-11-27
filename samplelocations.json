@@ -197,6 +197,7 @@
                     "BikeId": {"S":"120"},
                     "Status": {"N":"0"},
                     "LocationName": {"S":"Cambridge-MIT"}
+
                 }
             }
         }
