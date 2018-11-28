@@ -22,7 +22,7 @@ This is a sample template for bikeshare-app - Below is a brief explanation of wh
 * AWS CLI already configured with Administrator permission
 * [NodeJS 8.10+ installed](https://nodejs.org/en/download/)
 * [Docker installed](https://www.docker.com/community-edition), 
-* SAM CLI installed, for desktops with docker toolbox , please make sure 'SAM CLI, version 0.6.1' or higher.
+* SAM CLI installed, for desktops with docker toolbox , please make sure 'SAM CLI, version 0.6.1' or higher is installed.
 
 ## Setup process
 
