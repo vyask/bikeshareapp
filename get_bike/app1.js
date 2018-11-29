@@ -58,7 +58,7 @@ exports.gbikeHandler = (event, context, callback) => {
 
 function  updateBikeLocations( bikeid,locationid,userid) 
 {
-    console.log("in update");
+    
        var updateqry = {
             TableName: "bikelocations",
             ExpressionAttributeValues: {":a3":{"N":"1"},":a4":{"N":"0"}},
